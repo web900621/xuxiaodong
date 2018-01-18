@@ -1,0 +1,91 @@
+<p-dialog [(visible)]="display" modal="modal"  [responsive]="true" [width]="width"(onHide)="closeMask(false)">
+  <p-header>
+    {{title}}
+  </p-header>
+  <table>
+    <tbody>
+    <tr>
+      <td>标签名称</td>
+      <td>
+        <div class="ui-g">
+          <div class="ui-g-12">
+            <input type="text" pInputText ngClass="ui-g-12" />
+          </div>  
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>必选项</td>
+      <td>
+        <div class="ui-g">
+          <div class="ui-g-2" *ngFor="let nessary of options.nessaryOptions">
+            <p-checkbox name="groupname" value="{{nessary.val}}" label="{{nessary.label}}"  [(ngModel)]="selectedValues" ></p-checkbox>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>可选项</td>
+      <td>
+        <div class="ui-g">
+          <div class="ui-g-2" *ngFor="let innessaryoption of options.innessaryOptions">
+            <p-checkbox name="groupname" value="{{innessaryoption.val}}" label="{{innessaryoption.label}}" [(ngModel)]="selectedValues"></p-checkbox>
+          </div>
+          <!--<div class="ui-g-2">-->
+          <!--<p-checkbox name="groupname" value="类别" label="类别"  [(ngModel)]="selectedValues"></p-checkbox>-->
+          <!--</div>-->
+          <!--<div class="ui-g-2">-->
+          <!--<p-checkbox name="groupname" value="品牌" label="品牌" [(ngModel)]="selectedValues" ></p-checkbox>-->
+          <!--</div>-->
+          <!--<div class="ui-g-2">-->
+          <!--<p-checkbox name="groupname" value="序列号" label="序列号" [(ngModel)]="selectedValues"></p-checkbox>-->
+          <!--</div>-->
+          <!--<div class="ui-g-2">-->
+          <!--<p-checkbox name="  groupname" value="所有者" label="所有者" [(ngModel)]="selectedValues"></p-checkbox>-->
+          <!--</div>-->
+          <!--<div class="ui-g-2">-->
+          <!--<p-checkbox name="  groupname" value="供应商" label="供应商" [(ngModel)]="selectedValues"></p-checkbox>-->
+          <!--</div>-->
+          <!--<div class="ui-g-2">-->
+          <!--<p-checkbox name="  groupname" value="所属应用" label="所属应用" [(ngModel)]="selectedValues"></p-checkbox>-->
+          <!--</div>-->
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  Selected Cities: <span *ngFor="let city of selectedValues" style="margin-right:10px">{{city}}</span>
+
+  <div class="ui-g">
+    <div class="ui-g-4">
+      <div class="ui-g-12">
+        <label class="ui-g-4">调整顺序</label>
+        <div class="ui-g-3 ui-g-offset-2">
+          <button pButton type="button" label="上移" [disabled]="!selectedValue"></button>
+        </div>
+        <div class="ui-g-3">
+          <button pButton type="button" label="下移" [disabled]="!selectedValue"></button>
+        </div>
+      </div>
+      <ng-container *ngFor="let city of selectedValues">
+        <div class="ui-g-12">
+          <p-radioButton name="groupname1" value="{{city}}" label="{{city}}"[(ngModel)]="selectedValue"></p-radioButton>
+        </div>
+      </ng-container>
+      {{selectedValue}}
+    </div>
+    <div class="ui-g-8">
+      <div>打印预览效果展示</div>
+      <div class="print-background">
+        <ng-container *ngFor="let city of selectedValues">
+          <li>{{city}}:xxxxxxxxx</li>
+        </ng-container>
+        <img src="assets/cnaidc.png"/>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <button type="submit" pButton label="确认" class="ui-button"></button>
+    <button type="button" pButton label="取消" class="ui-button-cancel" (click)="closeMask(false)"></button>
+  </p-footer>
+</p-dialog>
